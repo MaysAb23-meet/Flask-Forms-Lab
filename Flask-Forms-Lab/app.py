@@ -15,16 +15,28 @@ facebook_friends=["Loai","Yonathan","Adan", "George", "Fouad", "Celina"]
 
 @app.route('/', methods=['GET', 'POST'])  # '/' for the default page
 def login():
-	if request.method== 'POST':
-		if name==username
-  else:
-  	print("try again")
-
-  return render_template('login.html')
+	if request.method=='GET':
+		return render_template('login.html')
+	else:
+		username1 = request.form['username']
+		password1 = request.form['password']
+		if username1==username and password1==password:
+			return render_template("home.html" , facebook_friends=facebook_friends)
+		else:
+			return render_template("login.html")
 
 @app.route('/home')
-def home(facebook_friends[]):
-	return render_template('home.html'facebook_frieands=facebook_frieands)
+def home():
+	return render_template('home.html', facebook_friends=facebook_friends)
+
+
+@app.route('/friend_exists/<string:name>' ,methods=['GET', 'POST'])
+def friend_exists(name):
+	if name in facebook_friends:
+		return render_template("friend_exists.html",name=name, idk="true")
+	else:
+		return render_template("friend_exists.html",name=name, idk="false")
+
 
 
 
